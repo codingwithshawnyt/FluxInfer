@@ -13,7 +13,6 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/) [![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange?logo=rust&logoColor=white)](https://www.rust-lang.org/) [![arXiv](https://img.shields.io/badge/arXiv-2312.xxxxx-B31B1B.svg)](https://arxiv.org/) [![Status](https://img.shields.io/badge/Status-Public%20Beta-green)](https://github.com/FluxInfer/FluxInfer)
 
-[**Documentation**](https://fluxinfer.ai/docs) | [**Benchmarks**](#-benchmarks) | [**Paper**](https://arxiv.org) | [**Discord**](https://discord.gg/fluxinfer)
 
 </div>
 
