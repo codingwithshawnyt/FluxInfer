@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
-/// Represents the precision level for quantization
+/// Represents the precision level for quantization modeling
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, PartialEq)]
 #[pyclass]
 pub enum QuantizationMode {
@@ -17,9 +17,9 @@ pub enum QuantizationMode {
 #[pyclass]
 pub enum OptimizationLevel {
     None,
-    O1, // Basic: Operator Fusion
-    O2, // Advanced: Quantization + PagedAttention
-    O3, // Aggressive: Speculative Decoding + MoE Routing + Kernel Fusion
+    O1, // Basic: Operator Fusion Modeling
+    O2, // Advanced: Quantization + PagedAttention Modeling
+    O3, // Aggressive: Speculative Decoding + MoE Routing Modeling
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -57,7 +57,8 @@ impl InferenceConfig {
     }
 }
 
-/// Simulates the PagedAttention memory manager
+/// Simulates the PagedAttention memory manager behavior
+/// This does not allocate GPU memory, but tracks logical block usage.
 struct PagedAttentionBlockTable {
     block_size: usize,
     num_blocks: usize,
@@ -79,7 +80,7 @@ impl PagedAttentionBlockTable {
     fn allocate(&mut self, seq_id: usize, num_tokens: usize) -> Option<usize> {
         let blocks_needed = (num_tokens + self.block_size - 1) / self.block_size;
         if self.free_blocks.len() < blocks_needed {
-            return None; // OOM
+            return None; // OOM Simulation
         }
         let mut allocated = Vec::new();
         for _ in 0..blocks_needed {
@@ -106,7 +107,7 @@ pub struct FluxEngine {
 impl FluxEngine {
     #[new]
     fn new(config: InferenceConfig) -> Self {
-        // Simulate 80GB VRAM / block size 16KB
+        // Simulate 80GB VRAM / block size 16KB for the model
         let total_mem = 80 * 1024 * 1024 * 1024; 
         let block_size = 16 * 1024;
         
@@ -117,35 +118,39 @@ impl FluxEngine {
         }
     }
 
+    /// Simulates the compilation of an optimization graph.
+    /// In a real engine, this would generate CUDA kernels. 
+    /// Here, it validates compatibility and returns the plan.
     fn optimize(&self) -> String {
-        let mut pipeline = vec!["Initializing FluxInfer Optimization Graph...".to_string()];
+        let mut pipeline = vec!["Initializing FluxInfer Optimization Simulation...".to_string()];
         
         if self.config.use_flash_attention {
-            pipeline.push("✓ FlashAttention-v3 (Triton kernel) injected".to_string());
+            pipeline.push("✓ FlashAttention-v3 (Model) enabled".to_string());
         }
         
         match self.config.quantization_mode {
-            QuantizationMode::Int4 => pipeline.push("✓ AWQ Int4 Quantization enabled (W4A16)".to_string()),
-            QuantizationMode::Int8 => pipeline.push("✓ SmoothQuant Int8 enabled".to_string()),
-            _ => pipeline.push("✓ FP16 Precision kept".to_string()),
+            QuantizationMode::Int4 => pipeline.push("✓ AWQ Int4 Quantization Model (W4A16)".to_string()),
+            QuantizationMode::Int8 => pipeline.push("✓ SmoothQuant Int8 Model".to_string()),
+            _ => pipeline.push("✓ FP16 Precision Model".to_string()),
         }
 
         match self.config.optimization_level {
             OptimizationLevel::O3 => {
-                pipeline.push("✓ Speculative Decoding (Gamma=5) active".to_string());
-                pipeline.push("✓ MoE Adaptive Routing matrix built".to_string());
-                pipeline.push("✓ CUDA Graph Capture enabled".to_string());
+                pipeline.push("✓ Speculative Decoding (Gamma=5) Model active".to_string());
+                pipeline.push("✓ MoE Adaptive Routing Logic enabled".to_string());
             },
             OptimizationLevel::O2 => {
-                pipeline.push("✓ Continuous Batching scheduler active".to_string());
+                pipeline.push("✓ Continuous Batching Scheduler Model active".to_string());
             },
             _ => {}
         }
         
-        pipeline.push(format!("✓ PagedAttention Block Table initialized (Block Size: {}B)", 16*1024));
+        pipeline.push(format!("✓ PagedAttention Logical Table initialized (Block Size: {}B)", 16*1024));
         pipeline.join("\n")
     }
 
+    /// Calculates projected inference latency based on mathematical models.
+    /// This is a discrete event simulation step, not real execution.
     fn simulate_inference(&self, token_count: usize) -> PyResult<f64> {
         let mut metrics = self.metrics.lock().unwrap();
         let mut cache = self.kv_cache_manager.lock().unwrap();
@@ -156,15 +161,15 @@ impl FluxEngine {
             return Ok(-1.0); // OOM simulation
         }
 
-        // 2. Calculate Latency
-        // Base latency per token in microseconds
+        // 2. Calculate Latency (Model)
+        // Base latency per token in microseconds (Theoretical H100 Baseline)
         let mut base_latency_us = 15000.0; 
 
         if self.config.use_flash_attention {
-            base_latency_us *= 0.60; // 40% speedup
+            base_latency_us *= 0.60; // 40% speedup model
         }
 
-        // Quantization speedups
+        // Quantization speedups model
         match self.config.quantization_mode {
             QuantizationMode::Int4 => base_latency_us *= 0.45,
             QuantizationMode::Int8 => base_latency_us *= 0.65,
@@ -173,8 +178,8 @@ impl FluxEngine {
 
         match self.config.optimization_level {
             OptimizationLevel::O1 => base_latency_us *= 0.9,
-            OptimizationLevel::O2 => base_latency_us *= 0.7, // Continuous batching overhead reduction
-            OptimizationLevel::O3 => base_latency_us *= 0.5, // Speculative decoding effective throughput
+            OptimizationLevel::O2 => base_latency_us *= 0.7, // Continuous batching overhead reduction model
+            OptimizationLevel::O3 => base_latency_us *= 0.5, // Speculative decoding effective throughput model
             OptimizationLevel::None => {},
         }
 
