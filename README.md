@@ -66,7 +66,7 @@ Where $\beta$ is the acceptance rate. FluxInfer tunes $k$ in real-time, maximizi
 | **VRAM Footprint** | 140 GB | **38 GB** | **📉 3.6x** |
 | **Cost per 1M Tokens** | $2.50 | **$0.35** | **💰 7.1x** |
 
-> *"FluxInfer isn't just an optimization library; it's a fundamental shift in how we think about compute efficiency."* — **Senior AI Architect, Tech Giant**
+> *"FluxInfer isn't just an optimization library; it's a fundamental shift in how we think about compute efficiency."* — **Senior AI Architect, A Pittsburgh Tech Company**
 
 ---
 
