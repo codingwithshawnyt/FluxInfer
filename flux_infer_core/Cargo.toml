@@ -1,0 +1,15 @@
+[package]
+name = "flux_infer_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "flux_infer_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.20.0", features = ["extension-module"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rand = "0.8"
+tokio = { version = "1", features = ["full"] }
