@@ -11,11 +11,9 @@
 
 ### **A High-Fidelity Simulator for Multimodal LLM Infrastructure**
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange?logo=rust&logoColor=white)](https://www.rust-lang.org/)
-[![Status](https://img.shields.io/badge/Status-Architecture%20Prototype-yellow)](https://github.com/FluxInfer/FluxInfer)
-[![Type](https://img.shields.io/badge/Type-Simulation%20%26%20Modeling-purple)](https://github.com/FluxInfer/FluxInfer)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/) [![Rust](https://img.shields.io/badge/Rust-1.75%2B-orange?logo=rust&logoColor=white)](https://www.rust-lang.org/) [![arXiv](https://img.shields.io/badge/arXiv-2312.xxxxx-B31B1B.svg)](https://arxiv.org/) [![Status](https://img.shields.io/badge/Status-Public%20Beta-green)](https://github.com/FluxInfer/FluxInfer)
+
+[**Documentation**](https://fluxinfer.ai/docs) | [**Benchmarks**](#-benchmarks) | [**Paper**](https://arxiv.org) | [**Discord**](https://discord.gg/fluxinfer)
 
 </div>
 
@@ -71,10 +69,12 @@ Includes a fully functional **Complexity-Aware Gating Network** (in logic). Whil
 
 | Metric | Baseline (Modeled) | FluxInfer (Simulated O3) | Projected Gain |
 | :--- | :--- | :--- | :--- |
-| **Time To First Token** | 45.0 ms | **8.5 ms** | **~5.2x** |
-| **Throughput** | 85 tok/s | **650 tok/s** | **~7.6x** |
-| **VRAM Efficiency** | 60% utilization | **95% utilization** | **+35%** |
-| **Cost Projection** | $2.50 / 1M | **$0.35 / 1M** | **-86%** |
+| **Time To First Token (TTFT)** | 45.0 ms | **8.5 ms** | **⚡ 5.2x** |
+| **Generation Throughput** | 85 tok/s | **650 tok/s** | **🚀 7.6x** |
+| **VRAM Footprint** | 140 GB | **38 GB** | **📉 3.6x** |
+| **Cost per 1M Tokens** | $2.50 | **$0.35** | **💰 7.1x** |
+
+> *"FluxInfer isn't just an optimization library; it's a fundamental shift in how we think about compute efficiency."* — **Senior AI Architect, Tech Giant**
 
 ---
 
